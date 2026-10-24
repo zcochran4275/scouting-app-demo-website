@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Transfer Portal · Between the Lines</title>
+<meta name="description" content="Coming soon: every player in the transfer portal, with how they actually played, the role they fit, and how well they'd suit your team.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="logo" href="index.html">Between the Lines</a>
+    <span class="badge">Available next season</span>
+    <nav class="site-nav" aria-label="Main">
+      <a href="index.html#app">Scouting Report</a>
+      <a href="transfer-portal.html" aria-current="page">Transfer Portal <span class="soon">· Soon</span></a>
+      <a href="about.html">About</a>
+      <a class="btn btn-primary" href="index.html#demo">Book a demo</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+<section class="page-hero">
+  <div class="wrap">
+    <span class="badge" style="border-radius:4px">Coming soon · Transfer Portal</span>
+    <h1 class="display">Find the right transfer, not just the available one.</h1>
+    <p class="lead">Every player in the portal, with how they actually played, the role they fit, and how well they'd suit your team. Built for D1 soccer.</p>
+    <a class="btn btn-primary btn-lg" href="#interest" style="margin-top:28px">Register interest</a>
+  </div>
+</section>
+
+<section class="band" style="padding-top:0">
+  <div class="wrap">
+    <h2 class="display">What it will include</h2>
+    <div class="cards">
+      <div class="card"><p class="big-num">01</p><h3>Everyone in the portal, with their D1 numbers</h3><p>See who has entered and how each player actually performed, without pulling stats yourself.</p></div>
+      <div class="card"><p class="big-num">02</p><h3>Playing style by position</h3><p>Each player tagged with the role they play, like a ball-playing center back or a wide creator. Players who mix two roles show as hybrids.</p></div>
+      <div class="card"><p class="big-num">03</p><h3>A few clear ratings, not 300 stats</h3><p>Scores for each main part of the game, such as build-up, chance creation and defending, to compare players at a glance.</p></div>
+      <div class="card"><p class="big-num">04</p><h3>Credit for the actions that lead to goals</h3><p>The pass that unlocked the attack counts, not only the goal and the assist.</p></div>
+      <div class="card"><p class="big-num">05</p><h3>Fit with your team</h3><p>How well a player suits the way you play and who you are losing, so you can see who replaces a departing starter.</p></div>
+      <div class="card"><p class="big-num">06</p><h3>Search and compare</h3><p>Filter by position, style and rating, then put players side by side.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="band alt">
+  <div class="wrap">
+    <h2 class="display">How it fits your recruiting</h2>
+    <ol class="steps">
+      <li><span class="step-n">1</span><span style="padding-top:4px"><strong>Tell it who you're losing</strong><br><span class="body-text">and the way you want to play.</span></span></li>
+      <li><span class="step-n">2</span><span style="padding-top:4px"><strong>Get a shortlist</strong><br><span class="body-text">of portal players who fit the role.</span></span></li>
+      <li><span class="step-n">3</span><span style="padding-top:4px"><strong>Compare and call</strong><br><span class="body-text">with their numbers in front of you.</span></span></li>
+    </ol>
+  </div>
+</section>
+
+<section class="band" id="interest">
+  <div class="wrap split">
+    <div>
+      <h2 class="display">Help shape it</h2>
+      <p class="body-text" style="margin-bottom:12px">The Transfer Portal tool is in development. Tell us what your staff needs from it and we'll build around coaches' answers.</p>
+      <p class="body-text">The Scouting Report is further along. <a href="index.html#app">See it and book a demo</a>.</p>
+    </div>
+    <form class="form" id="interest-form">
+      <label>Name<input type="text" name="name" autocomplete="name" required></label>
+      <label>School<input type="text" name="school" autocomplete="organization" required></label>
+      <label>Role<input type="text" name="role" placeholder="Head coach, assistant, analyst…"></label>
+      <label>Work email<input type="email" name="email" autocomplete="email" required></label>
+      <fieldset class="full"><legend>Program</legend><label><input type="checkbox" name="program" value="Men's"> Men's</label><label><input type="checkbox" name="program" value="Women's"> Women's</label></fieldset>
+      <label class="full">What would you need from it? (optional)<textarea name="needs" rows="3"></textarea></label>
+      <button class="btn btn-primary full" type="submit">Register interest</button>
+      <p class="form-status" id="form-status" role="status"></p>
+    </form>
+  </div>
+</section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <span>Between the Lines · In development</span>
+    <a href="mailto:zcochran@ucsd.edu">Email</a>
+    <a href="about.html">About</a>
+    <a href="index.html">Scouting Report</a>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
