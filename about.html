@@ -9,14 +9,24 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script>
+  // Pick the theme before the page draws: light, unless the visitor chose dark with the toggle.
+  (function () {
+    var saved = null;
+    try { saved = localStorage.getItem("theme"); } catch (e) {}
+    var dark = saved === "dark";
+    document.documentElement.setAttribute("data-theme", dark ? "dark" : "light");
+  })();
+</script>
 <link rel="stylesheet" href="css/styles.css">
+<meta name="theme-color" content="#FFFFFF">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
 
 <header class="site-header">
   <div class="wrap">
-    <a class="logo" href="index.html">Between the Lines</a>
+    <a class="logo" href="index.html" translate="no"><svg class="logo-mark" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="7" fill="#1E7A3C"/><rect x="6" y="8" width="20" height="16" rx="2" fill="none" stroke="#fff" stroke-width="2"/><line x1="16" y1="8" x2="16" y2="24" stroke="#fff" stroke-width="2"/><line class="mark-line" x1="11" y1="8" x2="11" y2="24" stroke="#8FD19E" stroke-width="1.5" stroke-dasharray="2 2"/><line class="mark-line" x1="21" y1="8" x2="21" y2="24" stroke="#8FD19E" stroke-width="1.5" stroke-dasharray="2 2"/></svg><span>Between the Lines</span></a>
     <span class="badge">Available next season</span>
     <nav class="site-nav" aria-label="Main">
       <a href="index.html#app">Scouting Report</a>
@@ -24,11 +34,16 @@
       <a href="about.html" aria-current="page">About</a>
       <a class="btn btn-primary" href="index.html#demo">Book a demo</a>
     </nav>
+    <button class="theme-toggle" type="button" aria-label="Switch to dark mode">
+      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+    </button>
   </div>
 </header>
 
 <main id="main">
 <section class="page-hero">
+  <div class="pitch-mark box top" aria-hidden="true"><i class="ln"></i><i class="six"></i><i class="cap"></i></div>
   <div class="wrap">
     <p class="eyebrow">About</p>
     <h1 class="display">Built by people in the room.</h1>
@@ -40,7 +55,7 @@
         <div style="flex:1 1 200px;min-width:0">
           <h2>Zach Cochran</h2>
           <p class="role">Co-founder</p>
-          <p>Leads analytics for UC San Diego men's soccer and plays professionally as a goalkeeper for Temecula FC. Data science student at UC San Diego and founder of Triton Ball, the university's sports analytics club.</p>
+          <p>Leads analytics for UC San Diego Men's and Women's soccer and plays semi-professionally as a goalkeeper for Temecula FC. Data science student at UC San Diego and founder of Triton Ball, the university's sports analytics club.</p>
         </div>
       </div>
       <div class="person">
@@ -56,9 +71,10 @@
 </section>
 
 <section class="band white">
+  <div class="pitch-mark centre" aria-hidden="true"><i class="ln"></i><i class="ring"></i></div>
   <div class="wrap split">
     <div style="flex:1 1 300px"><h2 class="display" style="margin:0">Why it exists</h2></div>
-    <div style="flex:2 1 520px;display:flex;flex-direction:column;gap:16px" class="body-text">
+    <div style="flex:2 1 520px;display:flex;flex-direction:column;gap:16px" class="body-text why-bubbles">
       <p>Opponent prep at the college level means hours of film and stat sheets that someone still has to turn into a plan. Most staffs don't have a full-time analyst to do that for every opponent.</p>
       <p>This tool does the reading for you. It goes through an opponent's full season, compares every tendency with the rest of D1, and writes out what makes them different in plain coaching language, with the stats, visuals and film moments behind each point.</p>
       <p>Between a player's view and an analyst's, we know what's useful on matchday and what isn't. Every page is built to answer a question a coaching staff actually asks.</p>
@@ -85,15 +101,15 @@
     </div>
     <div class="actions">
       <a class="btn btn-primary btn-lg" href="index.html#demo">Book a demo</a>
-      <a class="btn btn-secondary btn-lg" style="background:#fff" href="mailto:zcochran@ucsd.edu">Email us</a>
+      <a class="btn btn-secondary btn-lg" style="background:var(--surface)" href="mailto:zcochran@ucsd.edu">Email us</a>
     </div>
   </div>
 </section>
+<div class="pitch-mark box bottom" aria-hidden="true"><i class="ln"></i><i class="six"></i><i class="cap"></i></div>
 </main>
 
 <footer class="site-footer">
   <div class="wrap">
-    <span>Between the Lines · In development · Available next season</span>
     <a href="mailto:zcochran@ucsd.edu">Email</a>
     <a href="index.html">Scouting Report</a>
     <a href="transfer-portal.html">Transfer Portal</a>
