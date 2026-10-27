@@ -5,9 +5,12 @@
 //    Leave it empty to show the "Email us" fallback instead of the booking widget.
 const CALENDLY_URL = "https://calendly.com/zcochran/scouting-report-tool-demo";
 
-// 2. Where the Transfer Portal interest form is sent. Paste a form endpoint
-//    (Formspree, Getform, Basin, etc.). Leave empty to fall back to email.
-const INTEREST_FORM_ENDPOINT = "";
+// 2. Where the Transfer Portal interest form is sent. Submissions go through
+//    Web3Forms to the email the access key was created with. The key is public
+//    by design: it can only send mail to that inbox. Leave the endpoint empty
+//    to fall back to email.
+const INTEREST_FORM_ENDPOINT = "https://api.web3forms.com/submit";
+const INTEREST_FORM_ACCESS_KEY = "7d767ea4-e482-402e-89af-c27128f51af3";
 const CONTACT_EMAIL = "zcochran@ucsd.edu";
 
 // ---------------------------------------------------------------------------
@@ -311,6 +314,43 @@ const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").match
   document.body.appendChild(script);
 })();
 
+// Email links. Visitors without a mail app (e.g. Gmail in the browser) get
+// nothing from a mailto link, so also copy the address and show a "Copied"
+// bubble above the link, the way GitHub and most docs sites confirm a copy.
+(function setupEmailLinks() {
+  const links = document.querySelectorAll('a[href^="mailto:"]');
+  if (!links.length || !navigator.clipboard) return;
+  const tip = document.createElement("div");
+  tip.className = "copy-tip";
+  tip.setAttribute("aria-hidden", "true");
+  tip.innerHTML = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 4.5"/></svg><span></span>';
+  const tipText = tip.querySelector("span");
+  const announce = document.createElement("div");
+  announce.className = "sr-only";
+  announce.setAttribute("role", "status");
+  document.body.append(tip, announce);
+  let timer;
+  links.forEach((link) => {
+    link.addEventListener("click", () => {
+      const address = link.getAttribute("href").slice(7).split("?")[0];
+      navigator.clipboard.writeText(address).then(() => {
+        tipText.textContent = "Email copied: " + address;
+        const r = link.getBoundingClientRect();
+        const half = tip.offsetWidth / 2 + 8;
+        const x = Math.min(Math.max(r.left + r.width / 2, half), document.documentElement.clientWidth - half);
+        tip.style.left = x + window.scrollX + "px";
+        tip.style.top = r.top + window.scrollY + "px";
+        tip.classList.remove("show");
+        void tip.offsetWidth; // restart the animation on repeat clicks
+        tip.classList.add("show");
+        announce.textContent = "Email address copied: " + address;
+        clearTimeout(timer);
+        timer = setTimeout(() => tip.classList.remove("show"), 2000);
+      }).catch(() => {});
+    });
+  });
+})();
+
 // Transfer Portal interest form
 (function setupInterestForm() {
   const form = document.getElementById("interest-form");
@@ -320,6 +360,10 @@ const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").match
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
     const data = new FormData(form);
+    // Both program boxes share one name; send them as a single line.
+    const programs = data.getAll("program");
+    data.delete("program");
+    if (programs.length) data.set("program", programs.join(", "));
     if (!INTEREST_FORM_ENDPOINT) {
       const lines = [];
       data.forEach((v, k) => { if (v) lines.push(k + ": " + v); });
@@ -330,9 +374,13 @@ const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").match
     const button = form.querySelector('button[type="submit"]');
     status.textContent = "Sending…";
     if (button) button.disabled = true;
+    data.set("access_key", INTEREST_FORM_ACCESS_KEY);
+    data.set("subject", "Transfer Portal interest: " + data.get("name") + ", " + data.get("school"));
+    data.set("from_name", "Between the Lines website");
     try {
       const res = await fetch(INTEREST_FORM_ENDPOINT, { method: "POST", body: data, headers: { Accept: "application/json" } });
-      if (!res.ok) throw new Error(String(res.status));
+      const json = await res.json().catch(() => ({}));
+      if (!res.ok || json.success === false) throw new Error(json.message || String(res.status));
       form.reset();
       status.textContent = "Thanks. We'll be in touch as the Transfer Portal tool takes shape.";
     } catch (err) {
