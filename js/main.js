@@ -314,43 +314,6 @@ const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").match
   document.body.appendChild(script);
 })();
 
-// Email links. Visitors without a mail app (e.g. Gmail in the browser) get
-// nothing from a mailto link, so also copy the address and show a "Copied"
-// bubble above the link, the way GitHub and most docs sites confirm a copy.
-(function setupEmailLinks() {
-  const links = document.querySelectorAll('a[href^="mailto:"]');
-  if (!links.length || !navigator.clipboard) return;
-  const tip = document.createElement("div");
-  tip.className = "copy-tip";
-  tip.setAttribute("aria-hidden", "true");
-  tip.innerHTML = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 4.5"/></svg><span></span>';
-  const tipText = tip.querySelector("span");
-  const announce = document.createElement("div");
-  announce.className = "sr-only";
-  announce.setAttribute("role", "status");
-  document.body.append(tip, announce);
-  let timer;
-  links.forEach((link) => {
-    link.addEventListener("click", () => {
-      const address = link.getAttribute("href").slice(7).split("?")[0];
-      navigator.clipboard.writeText(address).then(() => {
-        tipText.textContent = "Email copied: " + address;
-        const r = link.getBoundingClientRect();
-        const half = tip.offsetWidth / 2 + 8;
-        const x = Math.min(Math.max(r.left + r.width / 2, half), document.documentElement.clientWidth - half);
-        tip.style.left = x + window.scrollX + "px";
-        tip.style.top = r.top + window.scrollY + "px";
-        tip.classList.remove("show");
-        void tip.offsetWidth; // restart the animation on repeat clicks
-        tip.classList.add("show");
-        announce.textContent = "Email address copied: " + address;
-        clearTimeout(timer);
-        timer = setTimeout(() => tip.classList.remove("show"), 2000);
-      }).catch(() => {});
-    });
-  });
-})();
-
 // Transfer Portal interest form
 (function setupInterestForm() {
   const form = document.getElementById("interest-form");
@@ -368,7 +331,7 @@ const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").match
       const lines = [];
       data.forEach((v, k) => { if (v) lines.push(k + ": " + v); });
       const body = encodeURIComponent(lines.join("\n"));
-      window.location.href = "mailto:" + CONTACT_EMAIL + "?subject=" + encodeURIComponent("Transfer Portal interest") + "&body=" + body;
+      window.location.href = "https://mail.google.com/mail/?view=cm&fs=1&to=" + encodeURIComponent(CONTACT_EMAIL) + "&cc=" + encodeURIComponent("aozbas@ucsd.edu") + "&su=" + encodeURIComponent("Transfer Portal interest") + "&body=" + body;
       return;
     }
     const button = form.querySelector('button[type="submit"]');
