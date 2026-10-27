@@ -18,10 +18,10 @@ Marketing site for Between the Lines, opponent scouting for D1 soccer. Plain HTM
 Double-click `index.html` to open it in your browser. Or, from this folder:
 
 ```
-python -m http.server 8000
+python scripts/preview.py
 ```
 
-then open http://localhost:8000.
+then open http://localhost:8000. This loopback-only preview serves website files and keeps local documents and Git metadata private. Stop it with Ctrl+C.
 
 ## Before launch
 
