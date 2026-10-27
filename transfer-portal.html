@@ -117,6 +117,8 @@
       <label>Work email<input type="email" name="email" autocomplete="email" spellcheck="false" required></label>
       <fieldset class="full"><legend>Program</legend><label><input type="checkbox" name="program" value="Men's"> Men's</label><label><input type="checkbox" name="program" value="Women's"> Women's</label></fieldset>
       <label class="full">What would you need from it? (optional)<textarea name="needs" rows="3" autocomplete="off"></textarea></label>
+      <!-- Honeypot: hidden from people; bots that tick it are discarded by Web3Forms. -->
+      <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
       <button class="btn btn-primary full" type="submit">Register interest</button>
       <p class="form-status" id="form-status" role="status"></p>
     </form>
