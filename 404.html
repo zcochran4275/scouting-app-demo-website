@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Page not found · Between the Lines</title>
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script>
+  // Pick the theme before the page draws: light, unless the visitor chose dark with the toggle.
+  (function () {
+    var saved = null;
+    try { saved = localStorage.getItem("theme"); } catch (e) {}
+    var dark = saved === "dark";
+    document.documentElement.setAttribute("data-theme", dark ? "dark" : "light");
+  })();
+</script>
+<link rel="stylesheet" href="/css/styles.css?v=12">
+<meta name="theme-color" content="#FFFFFF">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="logo" href="/index.html" translate="no"><svg class="logo-mark" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="7" fill="#1E7A3C"/><rect x="6" y="8" width="20" height="16" rx="2" fill="none" stroke="#fff" stroke-width="2"/><line x1="16" y1="8" x2="16" y2="24" stroke="#fff" stroke-width="2"/><line class="mark-line" x1="11" y1="8" x2="11" y2="24" stroke="#8FD19E" stroke-width="1.5" stroke-dasharray="2 2"/><line class="mark-line" x1="21" y1="8" x2="21" y2="24" stroke="#8FD19E" stroke-width="1.5" stroke-dasharray="2 2"/></svg><span class="logo-text"><span>Between the Lines</span><span class="logo-status">Available next season</span></span></a>
+    <nav class="site-nav" aria-label="Main">
+      <a href="/index.html#app">Scouting Report</a>
+      <a href="/transfer-portal.html">Transfer Portal <span class="soon">· Soon</span></a>
+      <a href="/about.html">About</a>
+      <a class="btn btn-primary" href="/index.html#demo">Book a demo</a>
+    </nav>
+    <a class="btn btn-primary header-cta" href="/index.html#demo">Book a demo</a>
+    <button class="theme-toggle" type="button" aria-label="Switch to dark mode">
+      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+    </button>
+  </div>
+</header>
+
+<main id="main" style="min-height:calc(100vh - 170px)">
+<section class="page-hero">
+  <div class="pitch-mark box top" aria-hidden="true"><i class="ln"></i><i class="six"></i><i class="cap"></i></div>
+  <div class="wrap">
+    <p class="eyebrow">404</p>
+    <h1 class="display">That page is out of bounds.</h1>
+    <p class="lead">The link may be old or mistyped. Head back to the home page or book a demo.</p>
+    <div class="hero-ctas" style="justify-content:flex-start;margin-top:28px">
+      <a class="btn btn-primary btn-lg" href="/">Go to the home page</a>
+      <a class="btn btn-secondary btn-lg" href="/index.html#demo">Book a demo</a>
+    </div>
+  </div>
+</section>
+<div class="pitch-mark box bottom" aria-hidden="true"><i class="ln"></i><i class="six"></i><i class="cap"></i></div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <a href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=zcochran@ucsd.edu&amp;cc=aozbas@ucsd.edu" target="_blank" rel="noopener noreferrer">zcochran@ucsd.edu</a>
+    <a href="/index.html">Scouting Report</a>
+    <a href="/about.html">About</a>
+    <a href="/transfer-portal.html">Transfer Portal</a>
+  </div>
+</footer>
+
+<script src="/js/main.js?v=12"></script>
+</body>
+</html>

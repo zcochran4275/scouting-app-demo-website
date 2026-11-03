@@ -263,7 +263,7 @@ const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").match
 (function setupReveal() {
   if (reduceMotion || !("IntersectionObserver" in window)) return;
   const targets = Array.from(document.querySelectorAll(
-    ".cred .wrap, .app-head, .pills, .panel-card, .sub-head, .section-card, .demo-card, .band h2, .card, .steps li, .person, .why-bubbles p, .form, .cta-row > div"
+    ".cred .wrap, .app-head, .pills, .panel-card, .sub-head, .section-card, .demo-card, .band h2, .card, .steps li, .person, .why-bubbles p, .form, .cta-row > div, .preparation .wrap > .eyebrow, .prep-intro, .prep-steps li, .finding-example, .prep-work > div"
   )).filter((el) => el.getBoundingClientRect().top > window.innerHeight);
   const counts = new Map();
   targets.forEach((el) => {
@@ -305,13 +305,24 @@ const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").match
   const box = document.getElementById("calendly");
   if (!box) return;
   if (!CALENDLY_URL) return; // keeps the fallback content already in the page
-  box.innerHTML = "";
-  box.className = "calendly-inline-widget";
-  box.setAttribute("data-url", CALENDLY_URL + (CALENDLY_URL.includes("?") ? "&" : "?") + "hide_gdpr_banner=1&primary_color=1e7a3c");
-  const script = document.createElement("script");
-  script.src = "https://assets.calendly.com/assets/external/widget.js";
-  script.async = true;
-  document.body.appendChild(script);
+  function load() {
+    box.innerHTML = "";
+    box.className = "calendly-inline-widget";
+    box.setAttribute("data-url", CALENDLY_URL + (CALENDLY_URL.includes("?") ? "&" : "?") + "hide_gdpr_banner=1&primary_color=1e7a3c");
+    const script = document.createElement("script");
+    script.src = "https://assets.calendly.com/assets/external/widget.js";
+    script.async = true;
+    document.body.appendChild(script);
+  }
+  // Calendly is heavy, so it loads only when a visitor scrolls near the booking section,
+  // which keeps the rest of the page fast, most of all on phones.
+  if (!("IntersectionObserver" in window)) { load(); return; }
+  const io = new IntersectionObserver((entries) => {
+    if (!entries.some((e) => e.isIntersecting)) return;
+    io.disconnect();
+    load();
+  }, { rootMargin: "900px 0px" });
+  io.observe(box);
 })();
 
 // Transfer Portal interest form
@@ -351,5 +362,34 @@ const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").match
     } finally {
       if (button) button.disabled = false;
     }
+  });
+})();
+
+// Film references: the drop-down slides open and closed instead of jumping.
+(function setupFilmReferences() {
+  if (reduceMotion) return;
+  document.querySelectorAll("details.film-references").forEach((details) => {
+    const summary = details.querySelector("summary");
+    const body = details.querySelector(".film-body");
+    if (!summary || !body) return;
+    let anim = null;
+    summary.addEventListener("click", (e) => {
+      e.preventDefault();
+      const from = details.open ? body.getBoundingClientRect().height : 0;
+      if (anim) anim.cancel();
+      const closing = details.open && !details.classList.contains("is-closing");
+      details.classList.toggle("is-closing", closing);
+      details.open = true;
+      const to = closing ? 0 : body.scrollHeight;
+      anim = body.animate(
+        { height: [from + "px", to + "px"], opacity: [closing ? 1 : 0, closing ? 0 : 1] },
+        { duration: 320, easing: "cubic-bezier(.2, .7, .2, 1)" }
+      );
+      anim.onfinish = () => {
+        anim = null;
+        if (closing) details.open = false;
+        details.classList.remove("is-closing");
+      };
+    });
   });
 })();

@@ -17,9 +17,10 @@
   --weakness: #B42318;
   --tendency: #475467;
   --warn: #D97706;
-  --warn-ink: #A15C05;
+  --warn-ink: #8F5204;
   --link: #1E7A3C;
   --link-hover: #155C2C;
+  --tint-ink: #155C2C; /* text on the pale-green chips; darker than --link so it clears 4.5:1 */
   --inverse: #12201A;
   --on-inverse: #FFFFFF;
   --on-inverse-sub: #C9D4CD;
@@ -84,6 +85,7 @@ h1, h2, h3, h4, p { margin: 0; }
 .site-nav { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 24px; margin-left: auto; }
 .site-nav a:not(.btn) { color: var(--ink); text-decoration: none; font-weight: 500; padding: 6px 0; }
 .site-nav a[aria-current="page"] { font-weight: 700; border-bottom: 2px solid var(--accent); }
+@media (max-width: 1045px) { .site-nav a:not(.btn) { padding: 9px 0; } } /* touch screens: taller menu links */
 .soon { font-size: 12px; color: var(--muted); }
 
 /* Hero */
@@ -94,7 +96,7 @@ h1, h2, h3, h4, p { margin: 0; }
 .qtrack { display: flex; flex-direction: column; animation: qwall 12s ease-in-out infinite; }
 .qslide { height: 220px; padding: 24px 32px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
 .qslide .q { font-family: var(--font-display); font-weight: 700; font-size: clamp(30px, 4.6vw, 46px); line-height: 1.05; }
-.qslide a { margin-top: 12px; font-weight: 600; color: var(--highlight); }
+.qslide a { margin-top: 4px; padding: 8px 6px; font-weight: 600; color: var(--highlight); }
 .qslide a:hover { color: #fff; }
 @keyframes qwall { 0%,20% { transform: translateY(0); } 25%,45% { transform: translateY(-25%); } 50%,70% { transform: translateY(-50%); } 75%,95% { transform: translateY(-75%); } 100% { transform: translateY(0); } }
 .qbanner:hover .qtrack, .qbanner:focus-within .qtrack { animation-play-state: paused; }
@@ -213,7 +215,7 @@ h1, h2, h3, h4, p { margin: 0; }
 .section-card.dark { background: var(--inverse); color: var(--on-inverse); border-color: var(--inverse); }
 .section-card.dark .sub { color: var(--on-inverse-sub); }
 .section-card.dark li span { color: var(--on-inverse-body); }
-.section-card .flag { font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink); background: var(--highlight); border-radius: 4px; padding: 2px 8px; }
+.section-card .flag { font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #12201A; background: var(--highlight); border-radius: 4px; padding: 2px 8px; }
 
 /* Scout Chat demo */
 .chat { max-width: 720px; margin: 0 auto; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
@@ -301,7 +303,6 @@ h1, h2, h3, h4, p { margin: 0; }
 .pitch-mark { position: absolute; left: 50%; z-index: 1; transform: translateX(-50%); color: var(--line-strong); pointer-events: none; }
 .pitch-mark i { position: absolute; display: block; }
 .pitch-mark.centre { top: -24px; width: calc(100% - 2 * var(--touch)); height: 48px; } /* touchline to touchline */
-.app > .pitch-mark.centre { top: -12px; } /* centred in the gap between the background line and "Inside the app" */
 .pitch-mark.centre .ln { left: 0; right: 0; top: 50%; margin-top: -.75px; border-top: 1.5px solid; }
 .pitch-mark.centre .ring { left: 50%; top: 0; width: 48px; height: 48px; margin-left: -24px; border: 1.5px solid; border-radius: 50%; background: radial-gradient(circle, currentColor 0 3px, transparent 3.5px); }
 /* Penalty boxes: sides meet the goal line, with the six-yard box inside and the D outside */
@@ -343,15 +344,16 @@ main::after {
     radial-gradient(circle at 0 100%, var(--arc)) left bottom / 30px 30px no-repeat,
     radial-gradient(circle at 100% 100%, var(--arc)) right bottom / 30px 30px no-repeat;
 }
-.demo-card { max-width: 760px; margin: 0 auto; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 32px; }
+.demo-card { max-width: 760px; width: calc(100% - 32px); margin: 0 auto; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 32px; }
 .demo-card h2 { font-size: 28px; }
 .demo-card p { margin: 8px 0 24px; color: var(--body); }
 .calendly-box { min-height: 260px; border: 1px dashed var(--line-strong); border-radius: 8px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; color: var(--muted); padding: 24px; text-align: center; }
 .calendly-inline-widget { position: relative; min-width: 300px; height: 700px; background: var(--surface-2); border-radius: 8px; }
 .calendly-inline-widget::before { content: "Loading the booking calendar…"; position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; color: var(--muted); }
 .calendly-inline-widget iframe { position: relative; z-index: 1; }
-.site-footer { border-top: 1.5px solid var(--line-strong); padding: 32px 0; background: var(--surface); }
-.site-footer .wrap { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px 32px; color: var(--muted); font-size: 15px; }
+.site-footer { border-top: 1.5px solid var(--line-strong); padding: 22px 0; background: var(--surface); }
+.site-footer .wrap { display: flex; flex-wrap: wrap; justify-content: center; gap: 0 28px; color: var(--muted); font-size: 15px; }
+.site-footer a { padding: 10px 2px; } /* a finger-sized target without changing how the row looks */
 
 /* Inner pages */
 .page-hero { padding: 80px 0 56px; }
@@ -407,6 +409,11 @@ main::after {
   .typing { white-space: normal; }
   .typing::after { display: none; }
   .chat-top { flex-direction: column; }
+  /* Booking card: keeps the page gutter instead of running edge to edge, and lets the
+     calendar shrink to fit the narrowest phones instead of scrolling the whole page sideways */
+  .demo { padding: 56px 0; }
+  .demo-card { padding: 22px 16px; }
+  .calendly-inline-widget { min-width: 0; }
 }
 
 /* Transfer Portal: sample shortlist beside the intro */
@@ -468,6 +475,7 @@ main::after {
   --pitch: #18281F;
   --link: #8FD19E;
   --link-hover: #B5E5C0;
+  --tint-ink: #8FD19E;
   --inverse: #22382B;
   --cat-1: #2F8A4C;
   --cat-2: #3987E5;
@@ -544,82 +552,113 @@ main::after {
 }
 
 /* "Coming soon" chip beside the Transfer Portal label: pale green, so it doesn't read as a button */
-.soon-chip { display: inline-block; margin-left: 10px; padding: 3px 8px; border-radius: 4px; background: color-mix(in srgb, var(--accent) 12%, transparent); color: var(--link); font-size: 13px; letter-spacing: 0; text-transform: none; vertical-align: 1px; }
+.soon-chip { display: inline-block; margin-left: 10px; padding: 3px 8px; border-radius: 4px; background: color-mix(in srgb, var(--accent) 12%, transparent); color: var(--tint-ink); font-size: 13px; letter-spacing: 0; text-transform: none; vertical-align: 1px; }
 
-/* "Copied" bubble shown above an email link when it is clicked */
-.copy-tip { position: absolute; z-index: 100; display: flex; align-items: center; gap: 6px; padding: 7px 12px; border-radius: 8px; background: var(--ink); color: var(--surface); font-size: 14px; font-weight: 600; white-space: nowrap; box-shadow: 0 4px 16px rgba(0,0,0,.16); pointer-events: none; opacity: 0; transform: translate(-50%, calc(-100% - 4px)) scale(.94); transform-origin: 50% 100%; transition: opacity .16s ease-out, transform .16s ease-out; }
-.copy-tip::after { content: ""; position: absolute; left: 50%; top: 100%; margin-left: -6px; border: 6px solid transparent; border-top-color: var(--ink); }
-.copy-tip.show { opacity: 1; transform: translate(-50%, calc(-100% - 10px)) scale(1); }
-.copy-tip svg { width: 16px; height: 16px; flex: none; color: var(--highlight); }
-:root[data-theme="dark"] .copy-tip svg { color: var(--accent); }
-.sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
-@media (prefers-reduced-motion: reduce) { .copy-tip, .copy-tip.show { transition: opacity .16s; transform: translate(-50%, calc(-100% - 10px)); } }
 
-/* Preparation workflow */
-.preparation .eyebrow { margin-bottom: 12px; }
-.prep-intro { max-width: 760px; font-size: 19px; }
-.prep-steps { list-style: none; padding: 0; margin: 28px 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
-.prep-steps li { padding: 24px; background: var(--bg); border: 1px solid var(--line); border-radius: var(--radius); }
-.prep-steps h3 { font-size: 20px; line-height: 1.2; margin: 16px 0 10px; }
-.prep-steps p, .prep-work dd { color: var(--body); }
-.prep-work { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; margin: 0; padding-top: 24px; border-top: 1px solid var(--line); }
-.prep-work dt { font-weight: 700; margin-bottom: 6px; }
-.prep-work dd { margin: 0; }
+/* Opponent preparation: laid out like the other home-page sections, with a centred head,
+   cards that rise in and lift on hover, and the report example framed like a panel from the app. */
+.preparation { padding: 72px 0 64px; }
+.preparation .wrap > .eyebrow, .preparation h2, .prep-intro { text-align: center; }
+.preparation h2 { font-size: 44px; margin: 8px 0 0; }
+.prep-intro { max-width: 62ch; margin: 16px auto 0; font-size: 19px; text-wrap: balance; }
+.prep-steps { list-style: none; padding: 0; margin: 40px 0 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.prep-steps li { background: var(--bg); border: 1px solid var(--line); border-radius: var(--radius); padding: 22px; transition: transform .2s ease, border-color .2s ease; }
+.prep-steps li:hover { transform: translateY(-3px); border-color: var(--line-strong); }
+.prep-steps .num { display: block; width: auto; height: auto; background: none; border-radius: 0; font-family: var(--font-display); font-size: 36px; line-height: 1; color: var(--link); }
+.prep-steps h3 { font-size: 20px; line-height: 1.25; margin: 10px 0 6px; }
+.prep-steps p { color: var(--body); }
+
+.finding-example { margin: 24px 0 0; padding: 28px; background: var(--bg); border: 1px solid var(--line); border-radius: 16px; }
+.finding-top { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; }
+.finding-top .note { margin: 0; }
+.finding-top .eyebrow { display: inline-block; padding: 3px 10px; border-radius: 999px; background: var(--chip-s); color: var(--strength-ink); font-size: 12px; font-weight: 700; letter-spacing: .1em; }
+.finding-example h3 { font-family: var(--font-display); font-weight: 700; text-transform: uppercase; font-size: clamp(28px, 3.4vw, 36px); line-height: 1; text-wrap: balance; margin: 14px 0 10px; }
+.finding-example > p { max-width: 72ch; color: var(--body); }
+.finding-example > p strong { color: var(--ink); }
+.finding-example > h3 + p { font-size: 18px; }
+.finding-example > h3 + p + .finding-visuals { margin-top: 28px; }
+.finding-example .note { font-size: 14px; color: var(--muted); }
+/* The three charts sit on one row; their frames share a height so the captions line up */
+.finding-visuals { display: grid; grid-template-columns: 1.4fr 1fr 1fr; column-gap: 16px; margin: 24px 0 4px; }
+.finding-visuals .finding-maps { display: contents; }
+.finding-visuals figure { margin: 0 0 16px; min-width: 0; display: grid; grid-row: span 2; grid-template-rows: subgrid; row-gap: 0; }
+.finding-visuals a { display: flex; align-items: center; background: #fff; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; transition: transform .2s ease, border-color .2s ease; }
+.finding-visuals a:hover { transform: translateY(-3px); border-color: var(--line-strong); }
+.finding-visuals img { display: block; width: 100%; height: auto; }
+.finding-visuals figcaption { font-size: 14px; color: var(--body); margin-top: 10px; }
+.finding-visuals figcaption strong { color: var(--ink); }
+:root[data-theme="dark"] .finding-visuals a { border-color: transparent; }
+:root[data-theme="dark"] .finding-visuals img { filter: brightness(.94); }
+
+.film-references { margin-top: 12px; border-top: 1px solid var(--line); padding-top: 8px; }
+/* A quiet text toggle in link green, so the references stay tucked away without a heavy button */
+.film-references summary { list-style: none; display: flex; align-items: center; gap: 10px; width: fit-content; max-width: 100%; min-height: 44px; color: var(--link); font-weight: 600; cursor: pointer; }
+.film-references summary::-webkit-details-marker { display: none; }
+.film-references summary::after { content: ""; flex: 0 0 auto; width: 8px; height: 8px; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: translateY(-2px) rotate(45deg); transition: transform .2s ease; }
+.film-references[open]:not(.is-closing) summary::after { transform: translateY(2px) rotate(-135deg); }
+.film-body { overflow: hidden; }
+.film-references summary:hover { color: var(--link-hover); text-decoration: underline; text-underline-offset: 3px; }
+.film-body > p { margin-top: 16px; max-width: 80ch; color: var(--body); }
+.film-team { margin-top: 24px; }
+.film-team h4 { font-family: var(--font-display); font-weight: 700; text-transform: uppercase; font-size: 20px; }
+.film-team > p { margin-top: 2px; font-size: 15px; color: var(--muted); }
+.reference-scroll { overflow-x: auto; margin-top: 12px; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; }
+.reference-scroll table { border-collapse: collapse; width: 100%; font-size: 14px; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.reference-scroll caption { text-align: left; padding: 12px 14px 4px; font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+.reference-scroll th, .reference-scroll td { padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--line); }
+.reference-scroll th { font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.reference-scroll tbody tr:last-child td { border-bottom: 0; }
+/* Status line as a pale green chip, like "Coming soon", so it doesn't read as a link */
+.playback-status { display: flex; align-items: center; gap: 8px; width: fit-content; max-width: 100%; margin-top: 16px; padding: 4px 12px; border-radius: 14px; background: color-mix(in srgb, var(--accent) 12%, transparent); color: var(--tint-ink); font-size: 14px; font-weight: 600; }
+.playback-status::before { content: ""; flex: 0 0 auto; width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+
+/* The work the report saves, each marked with a tick in a pale green circle */
+.prep-work { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; margin: 40px 0 0; }
+.prep-work > div { position: relative; padding-left: 40px; }
+.prep-work > div::before { content: ""; position: absolute; left: 0; top: 0; width: 28px; height: 28px; border-radius: 50%; background: var(--chip-s); }
+.prep-work > div::after { content: ""; position: absolute; left: 10px; top: 7px; width: 6px; height: 11px; border-right: 2px solid var(--strength-ink); border-bottom: 2px solid var(--strength-ink); transform: rotate(45deg); }
+.prep-work dt { font-weight: 700; }
+.prep-work dd { margin: 2px 0 0; color: var(--body); }
+@media (prefers-reduced-motion: reduce) {
+  .prep-steps li:hover, .finding-visuals a:hover { transform: none; }
+}
+@media (max-width: 700px) {
+  .preparation { padding: 56px 0 56px; }
+  .preparation h2 { font-size: 34px; }
+  .prep-intro { font-size: 18px; }
+  .prep-steps, .prep-work { grid-template-columns: 1fr; }
+  .prep-steps { margin-top: 28px; gap: 12px; }
+  .prep-steps li { padding: 18px; }
+  .prep-work { margin-top: 32px; gap: 18px; }
+  .finding-example { padding: 18px; }
+  .finding-visuals { grid-template-columns: 1fr; }
+}
+
+/* Scout Chat set-piece example */
 .film-status { aspect-ratio: auto; padding: 16px; font-size: 14px; }
 .example-label { color: var(--link); font-size: 13px; font-weight: 700; margin-bottom: 10px; }
-.taker-answer { padding-left: 20px; margin: 12px 0; }
-.taker-answer li + li { margin-top: 8px; }
-.taker-chart { margin: 18px 0 0; padding: 18px; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; font-size: 14px; }
-.taker-chart figcaption { font-weight: 700; margin-bottom: 16px; }
-.taker-chart > div { margin: 12px 0; }
-.taker-bar { display: flex; gap: 3px; margin-top: 5px; }
-.taker-bar b { background: var(--accent); color: #fff; padding: 6px; min-width: 64px; text-align: center; font-size: 13px; }
+/* Takers by type: sits in the same chart card as the other answers, and the bars wipe in left to right,
+   row after row, on the same beat as their charts (40% to 52% of the 14-second loop). */
+.taker-bar { display: flex; gap: 3px; margin-top: 4px; }
+.taker-bar b { background: var(--accent); color: #fff; padding: 5px 6px; min-width: 64px; text-align: center; font-size: 13px; border-radius: 3px; }
 .taker-bar b + b { background: var(--surface-2); color: var(--ink); border: 1px solid var(--line-strong); }
-@media (max-width: 700px) {
-  .prep-steps, .prep-work { grid-template-columns: 1fr; }
-  .prep-steps li { padding: 20px; }
-  .taker-chart { padding: 12px; }
-}
-.finding-example { margin: 32px 0; padding: clamp(16px, 3vw, 32px); border: 1px solid var(--line-strong); border-radius: var(--radius); background: var(--bg); }
-.finding-example h3 { font-family: var(--font-display); font-size: clamp(28px, 4vw, 40px); line-height: 1.1; margin: 12px 0; }
-.finding-example > p { max-width: 80ch; }
-.finding-example figure { margin: 24px 0; min-width: 0; }
-.finding-example img { display: block; width: 100%; height: auto; background: white; border-radius: 8px; }
-.finding-example figcaption { font-size: 14px; color: var(--muted); margin-top: 10px; }
-.finding-maps { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
-.film-references { border-top: 1px solid var(--line); padding-top: 16px; }
-.film-references summary { cursor: pointer; font-weight: 700; padding: 8px 0; }
-.film-references p { margin: 12px 0; color: var(--body); }
-.reference-scroll { overflow-x: auto; margin: 16px 0; }
-.reference-scroll table { border-collapse: collapse; width: 100%; font-size: 14px; white-space: nowrap; }
-.reference-scroll th, .reference-scroll td { padding: 10px; text-align: left; border-bottom: 1px solid var(--line); }
-.reference-scroll caption { text-align: left; font-weight: 600; margin-bottom: 8px; }
-.playback-status { font-size: 14px; font-weight: 600; margin-top: 16px; color: var(--link); }
-@media (max-width: 700px) { .finding-maps { grid-template-columns: 1fr; gap: 0; } }
+.taker-note { margin: 2px 0 0; font-size: 12px; }
+.chat.is-live .taker-bar { animation: takerWipe 14s ease-out infinite both; animation-delay: var(--d, 0ms); }
+@keyframes takerWipe { 0%, 40% { clip-path: inset(0 100% 0 0); } 52%, 100% { clip-path: inset(0); } }
 
-/* Compact evidence example: keep all three charts on one desktop row. */
-.preparation { padding: 40px 0; }
-.preparation h2 { margin-bottom: 14px; }
-.preparation .eyebrow { margin-bottom: 8px; }
-.prep-steps { margin: 20px 0; gap: 12px; }
-.prep-steps li { padding: 16px; }
-.prep-steps h3 { margin: 10px 0 6px; font-size: 18px; }
-.prep-steps p, .prep-work dd { font-size: 15px; }
-.finding-example { margin: 20px 0; padding: 20px; }
-.finding-example h3 { font-size: 30px; margin: 8px 0; }
-.finding-example .note { margin-top: 8px; font-size: 13px; }
-.finding-visuals { display: grid; grid-template-columns: 1.4fr 1fr 1fr; align-items: start; gap: 16px; margin: 16px 0; }
-.finding-visuals .finding-maps { display: contents; }
-.finding-visuals figure { margin: 0; }
-.finding-visuals a { display: block; border-radius: 8px; }
-.finding-visuals figcaption { font-size: 12px; margin-top: 6px; }
-.film-references { padding-top: 8px; }
-.playback-status { margin-top: 8px; }
-.prep-work { gap: 16px; padding-top: 16px; }
-@media (max-width: 700px) {
-  .preparation { padding: 28px 0; }
-  .prep-steps li { padding: 14px; }
-  .finding-example { padding: 14px; }
-  .finding-visuals { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
-  .finding-visuals .finding-rates { grid-column: 1 / -1; max-width: 440px; width: 100%; justify-self: center; }
+/* Phones: a compact "Book a demo" on the top row, between the logo and the theme toggle
+   (the full-size one in the menu is hidden there to keep the menu on one row). */
+.header-cta { display: none; }
+@media (max-width: 640px) {
+  .header-cta { display: inline-flex; order: 2; margin-left: auto; min-height: 36px; padding: 0 8px; font-size: 13px; }
+  .header-cta + .theme-toggle { margin-left: 0; }
+}
+@media (max-width: 400px) {
+  .logo { font-size: 18px; }
+  .site-header .wrap { column-gap: 8px; }
+}
+/* Very narrow phones: no room on the top row, so it gets its own row under the menu. */
+@media (max-width: 350px) {
+  .header-cta { order: 4; width: 100%; }
+  .header-cta + .theme-toggle { margin-left: auto; }
 }
